@@ -7,15 +7,19 @@ public static class AssetsCheckerProjectExplorer
 {
 	private const int GUID_STRING_LENGTH = 6;
 
-	private static List<string> GetAllAssets(params string[] assetExtension)
+	private static List<string> GetAssets(string assetExtension, params string[] additionalExtensions)
 	{
+		List<string> extensions = new List<string>();
+		extensions.Add(assetExtension);
+		extensions.AddRange(additionalExtensions);
+
 		string rootFolder = Application.dataPath;
 
 		List<AssetsCheckerAsset> assets = new List<AssetsCheckerAsset>();
-		
-		foreach(string extension in assetExtension)
+
+		foreach (string extension in extensions)
 		{
-			foreach(string assetPath in Directory.GetFiles(rootFolder, extension, SearchOption.AllDirectories))
+			foreach (string assetPath in Directory.GetFiles(rootFolder, extension, SearchOption.AllDirectories))
 			{
 				assets.Add(new AssetsCheckerAsset
 				{
@@ -24,12 +28,15 @@ public static class AssetsCheckerProjectExplorer
 			}
 		}
 
+		//foreach (var xd in assets)
+		//	Debug.Log(xd.Path);
+
 		return new List<string>();
 	}
 
 	public static string GetAssetGUID(string assetPath)
 	{
-		GetAllAssets(new string[] { "*.mat","*.prefab"});
+		GetAssets("*.png", new string[] { "*.mat", "*.prefab" });
 		//string metaFilePath = Application.dataPath + assetPath + ".meta";
 
 		//try
