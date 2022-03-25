@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
 
 //todo work on better class name
@@ -6,26 +7,47 @@ public static class AssetsCheckerProjectExplorer
 {
 	private const int GUID_STRING_LENGTH = 6;
 
-	public static string GetAssetGUID(string assetPath)
+	private static List<string> GetAllAssets(params string[] assetExtension)
 	{
-		string metaFilePath = Application.dataPath + assetPath + ".meta";
+		string rootFolder = Application.dataPath;
 
-		try
+		List<AssetsCheckerAsset> assets = new List<AssetsCheckerAsset>();
+		
+		foreach(string extension in assetExtension)
 		{
-			//todo check if File.ReadLines is optimal
-			foreach (string line in File.ReadLines(metaFilePath))
+			foreach(string assetPath in Directory.GetFiles(rootFolder, extension, SearchOption.AllDirectories))
 			{
-				if (line.Contains("guid:"))
+				assets.Add(new AssetsCheckerAsset
 				{
-					string guid = line.Substring(GUID_STRING_LENGTH, line.Length - GUID_STRING_LENGTH);
-					return guid;
-				}
+					Path = assetPath
+				});
 			}
 		}
-		catch
-		{
-			Debug.LogError("Could not find meta file at this path: " + metaFilePath);
-		}
+
+		return new List<string>();
+	}
+
+	public static string GetAssetGUID(string assetPath)
+	{
+		GetAllAssets(new string[] { "*.mat","*.prefab"});
+		//string metaFilePath = Application.dataPath + assetPath + ".meta";
+
+		//try
+		//{
+		//	//todo check if File.ReadLines is optimal
+		//	foreach (string line in File.ReadLines(metaFilePath))
+		//	{
+		//		if (line.Contains("guid:"))
+		//		{
+		//			string guid = line.Substring(GUID_STRING_LENGTH, line.Length - GUID_STRING_LENGTH);
+		//			return guid;
+		//		}
+		//	}
+		//}
+		//catch
+		//{
+		//	Debug.LogError("Could not find meta file at this path: " + metaFilePath);
+		//}
 
 		return string.Empty;
 	}
