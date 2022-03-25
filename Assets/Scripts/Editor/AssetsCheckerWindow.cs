@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -20,7 +18,7 @@ public class AssetsCheckerWindow : EditorWindow
     {
         if (GUILayout.Button("Find textures"))
 		{
-
+            Debug.Log(AssetsCheckerProjectExplorer.GetAssetGUID("/TestAssets/TestMaterial.mat"));
         }
 
         GUILayout.Label("Base Settings", EditorStyles.boldLabel);
