@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 namespace AssetsChecker
 {
@@ -26,6 +26,11 @@ namespace AssetsChecker
 			}
 
 			WriteAssetsToConsole();
+		}
+
+		public List<T> GetAssets<T>() where T : Asset
+		{
+			return m_assets.OfType<T>().ToList();
 		}
 
 		private void WriteAssetsToConsole()
