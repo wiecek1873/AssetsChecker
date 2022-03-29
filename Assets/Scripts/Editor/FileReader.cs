@@ -1,6 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace AssetsChecker
 {
@@ -8,19 +9,15 @@ namespace AssetsChecker
 	{
 		private const int GUID_STRING_LENGTH = 6;
 
-		public static List<string> FindAssetsOfType(string assetExtension, params string[] additionalExtensions)
+		public static List<string> FindAssetsOfType(string[] assetExtensions)
 		{
-			List<string> extensions = new List<string>();
-			extensions.Add(assetExtension);
-			extensions.AddRange(additionalExtensions);
-
-			AssetExtension.CheckForKnownExtensions(extensions);
+			AssetExtension.CheckForKnownExtensions(assetExtensions.ToList());
 
 			string rootFolder = Application.dataPath;
 
 			List<string> assets = new List<string>();
 
-			foreach (string extension in extensions)
+			foreach (string extension in assetExtensions)
 				foreach (string assetPath in Directory.GetFiles(rootFolder, "*" + extension, SearchOption.AllDirectories))
 					assets.Add(assetPath);
 
