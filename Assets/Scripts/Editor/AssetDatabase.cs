@@ -8,6 +8,8 @@ namespace AssetsChecker
 	{
 		private List<Asset> m_assets;
 
+		public bool IsCreated => m_assets != null;
+
 		public void Create()
 		{
 			m_assets = new List<Asset>();

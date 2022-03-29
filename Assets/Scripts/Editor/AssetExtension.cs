@@ -7,8 +7,8 @@ namespace AssetsChecker
 {
 	public static class AssetExtension
 	{
-		public static readonly string Material = ".mat";
-		public static readonly string Prefab = ".prefab";
+		public const string MATERIAL = ".mat";
+		public const string PREFAB = ".prefab";
 
 		public static List<string> Extensions()
 		{
@@ -35,6 +35,19 @@ namespace AssetsChecker
 			foreach (string extension in extensions)
 			{
 				if (!Extensions().Contains(extension))
+					throw new System.Exception("Unknown extension: " + extension);
+			}
+		}
+
+		public static Asset ExtensionToType(string extension)
+		{
+			switch (extension)
+			{
+				case MATERIAL:
+					return new Material();
+				case PREFAB:
+					return new Prefab();
+				default:
 					throw new System.Exception("Unknown extension: " + extension);
 			}
 		}

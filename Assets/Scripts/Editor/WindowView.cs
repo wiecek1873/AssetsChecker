@@ -21,9 +21,10 @@ namespace AssetsChecker
 		private void OnGUI()
 		{
 			if (GUILayout.Button("Scan assets"))
-			{
 				m_windowData.AssetDatabase.Create();
-			}
+
+			if (!m_windowData.AssetDatabase.IsCreated)
+				GUI.enabled = false;
 
 			DrawInspectToolbar();
 
@@ -31,8 +32,6 @@ namespace AssetsChecker
 
 			GUILayout.EndScrollView();
 
-			GUI.enabled = false;
-			m_myFloat = EditorGUILayout.Slider("Slider", m_myFloat, -3, 3);
 			GUI.enabled = true;
 		}
 

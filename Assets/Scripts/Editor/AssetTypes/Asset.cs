@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace AssetsChecker
 {
-	public class Asset
+	public abstract class Asset
 	{
 		public string Path;
 		public string GUID;
+
+		public abstract void DrawView();
+		public abstract void LoadData();
 	}
 }
