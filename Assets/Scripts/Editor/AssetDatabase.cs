@@ -6,7 +6,7 @@ namespace AssetsChecker
 {
 	public class AssetDatabase
 	{
-		public void CreateDatabase()
+		public void CreateDatabase(string assetExtension, params string[] additionalExtensions)
 		{
 
 		}
