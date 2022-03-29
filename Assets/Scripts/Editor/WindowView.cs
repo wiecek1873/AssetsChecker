@@ -18,10 +18,9 @@ namespace AssetsChecker
 
 		private void OnGUI()
 		{
-			if (GUILayout.Button("Refresh"))
+			if (GUILayout.Button("Scan assets"))
 			{
-				m_assetDatabase = new AssetDatabase();
-				m_assetDatabase.CreateDatabase();
+				m_windowData.AssetDatabase.Create();
 			}
 
 			DrawExtensionSection();
