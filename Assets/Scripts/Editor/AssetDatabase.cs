@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 namespace AssetsChecker
 {
@@ -16,14 +17,14 @@ namespace AssetsChecker
 			List<string> assetPaths = new List<string>();
 			assetPaths.AddRange(FileReader.FindAssetsOfType(AssetExtension.Extensions().ToArray()));
 
-			foreach(string assetPath in assetPaths)
+			foreach (string assetPath in assetPaths)
 			{
-				m_assets.Add(new Asset
-				{
-					Path = assetPath,
-					GUID = FileReader.GetAssetGUID(assetPath)
-				});
+				Asset asset = AssetExtension.ExtensionToObject(Path.GetExtension(assetPath));
+				asset.Path = assetPath;
+				asset.GUID = FileReader.GetAssetGUID(assetPath);
+				m_assets.Add(asset);
 			}
+
 			WriteAssetsToConsole();
 		}
 

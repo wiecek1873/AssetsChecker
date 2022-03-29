@@ -39,7 +39,7 @@ namespace AssetsChecker
 			}
 		}
 
-		public static Asset ExtensionToType(string extension)
+		public static Asset ExtensionToObject(string extension)
 		{
 			switch (extension)
 			{
