@@ -8,30 +8,21 @@ namespace AssetsChecker
 	{
 		private const int GUID_STRING_LENGTH = 6;
 
-		public static List<Asset> GetAssets(string assetExtension, params string[] additionalExtensions)
+		public static List<string> FindAssetsOfType(string assetExtension, params string[] additionalExtensions)
 		{
 			List<string> extensions = new List<string>();
 			extensions.Add(assetExtension);
 			extensions.AddRange(additionalExtensions);
 
+			AssetExtension.CheckForKnownExtensions(extensions);
+
 			string rootFolder = Application.dataPath;
 
-			List<Asset> assets = new List<Asset>();
+			List<string> assets = new List<string>();
 
 			foreach (string extension in extensions)
-			{
-				foreach (string assetPath in Directory.GetFiles(rootFolder, extension, SearchOption.AllDirectories))
-				{
-					assets.Add(new Asset
-					{
-						Path = assetPath,
-						GUID = GetAssetGUID(assetPath)
-					});
-				}
-			}
-
-			foreach (var xd in assets)
-				Debug.Log(xd.Path + " GUID: " + xd.GUID);
+				foreach (string assetPath in Directory.GetFiles(rootFolder, "*" + extension, SearchOption.AllDirectories))
+					assets.Add(assetPath);
 
 			return assets;
 		}

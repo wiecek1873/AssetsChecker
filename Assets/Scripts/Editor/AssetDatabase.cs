@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace AssetsChecker
 {
-	public class Asset
+	public class AssetDatabase : MonoBehaviour
 	{
-		public string Path;
-		public string GUID;
+		public void CreateDatabase()
+		{
+
+		}
 	}
 }

@@ -10,6 +10,8 @@ namespace AssetsChecker
 		private bool m_myBool = true;
 		private float m_myFloat = 1.23f;
 
+		AssetDatabase m_assetDatabase;
+
 		[MenuItem("Window/AssetsChecker")]
 		private static void ShowWindow()
 		{
@@ -20,7 +22,7 @@ namespace AssetsChecker
 		{
 			if (GUILayout.Button("Find textures"))
 			{
-				Debug.Log(FileReader.GetAssets("*.mat"));
+				Debug.Log("");
 			}
 
 			GUILayout.Label("Base Settings", EditorStyles.boldLabel);
