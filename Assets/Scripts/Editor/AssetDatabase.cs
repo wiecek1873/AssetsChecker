@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AssetsChecker
 {
-	public class AssetDatabase : MonoBehaviour
+	public class AssetDatabase
 	{
 		public void CreateDatabase()
 		{

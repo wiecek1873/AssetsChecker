@@ -22,16 +22,25 @@ namespace AssetsChecker
 		{
 			if (GUILayout.Button("Find textures"))
 			{
-				Debug.Log("");
+				m_assetDatabase = new AssetDatabase();
+				m_assetDatabase.CreateDatabase();
 			}
+
+			if(m_assetDatabase == null)
+				GUI.enabled = false;
 
 			GUILayout.Label("Base Settings", EditorStyles.boldLabel);
 			m_myString = EditorGUILayout.TextField("Text Field", m_myString);
 
-			m_groupEnabled = EditorGUILayout.BeginToggleGroup("Optional Settings", m_groupEnabled);
-			m_myBool = EditorGUILayout.Toggle("Toggle", m_myBool);
+			GUILayout.BeginHorizontal();
+			foreach(string extension in AssetExtension.ExtensionNames())
+			{
+				m_myBool = EditorGUILayout.Toggle(extension, m_myBool);
+			}
+			GUILayout.EndHorizontal();
+
 			m_myFloat = EditorGUILayout.Slider("Slider", m_myFloat, -3, 3);
-			EditorGUILayout.EndToggleGroup();
+			GUI.enabled = true;
 		}
 	}
 }
