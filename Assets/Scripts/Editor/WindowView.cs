@@ -7,6 +7,7 @@ namespace AssetsChecker
 	public class WindowView : EditorWindow
 	{
 		private float m_myFloat = 1.23f;
+		private int m_inspectToolbarIndex = 0;
 
 		WindowData m_windowData = new WindowData();
 
@@ -24,7 +25,7 @@ namespace AssetsChecker
 			}
 
 			DrawExtensionSection();
-
+			DrawInspectToolbar();
 			GUI.enabled = false;
 			m_myFloat = EditorGUILayout.Slider("Slider", m_myFloat, -3, 3);
 			GUI.enabled = true;
@@ -42,6 +43,11 @@ namespace AssetsChecker
 			}
 
 			GUILayout.EndHorizontal();
+		}
+
+		private void DrawInspectToolbar()
+		{
+			m_inspectToolbarIndex = GUILayout.Toolbar(m_inspectToolbarIndex, AssetExtension.ExtensionNames().ToArray());
 		}
 	}
 }
