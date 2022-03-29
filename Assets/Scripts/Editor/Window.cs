@@ -5,8 +5,6 @@ namespace AssetsChecker
 {
 	public class Window : EditorWindow
 	{
-		private string m_myString = "Hello World";
-		private bool m_groupEnabled;
 		private bool m_myBool = true;
 		private float m_myFloat = 1.23f;
 
@@ -20,7 +18,7 @@ namespace AssetsChecker
 
 		private void OnGUI()
 		{
-			if (GUILayout.Button("Find textures"))
+			if (GUILayout.Button("Refresh"))
 			{
 				m_assetDatabase = new AssetDatabase();
 				m_assetDatabase.CreateDatabase();
@@ -30,7 +28,6 @@ namespace AssetsChecker
 				GUI.enabled = false;
 
 			GUILayout.Label("Base Settings", EditorStyles.boldLabel);
-			m_myString = EditorGUILayout.TextField("Text Field", m_myString);
 
 			GUILayout.BeginHorizontal();
 			foreach(string extension in AssetExtension.ExtensionNames())
