@@ -28,31 +28,18 @@ namespace AssetsChecker
 
 			DrawInspectToolbar();
 
-			m_scrollPosition = GUILayout.BeginScrollView(m_scrollPosition);
-
-			foreach(var asset in m_windowData.AssetDatabase.GetAssets<Material>())
+			if (m_windowData.AssetDatabase.IsCreated)
 			{
-				GUILayout.Label(asset.Path);
-			}
+				m_scrollPosition = GUILayout.BeginScrollView(m_scrollPosition);
 
-			GUILayout.EndScrollView();
+				foreach (var asset in m_windowData.AssetDatabase.GetAssets<Material>())
+					asset.DrawView();
+
+				GUILayout.EndScrollView();
+			}
 
 			GUI.enabled = true;
 		}
-
-		//private void DrawExtensionSection()
-		//{
-		//	GUILayout.Label("Chose files extensions to check", EditorStyles.boldLabel);
-
-		//	GUILayout.BeginHorizontal();
-
-		//	for(int i = 0; i < m_windowData.ChosenExtensions.Count; i++)
-		//	{
-		//		m_windowData.ChosenExtensions[i] = EditorGUILayout.Toggle(AssetExtension.ExtensionNames()[i], m_windowData.ChosenExtensions[i]);
-		//	}
-
-		//	GUILayout.EndHorizontal();
-		//}
 
 		private void DrawInspectToolbar()
 		{
