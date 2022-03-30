@@ -33,7 +33,10 @@ namespace AssetsChecker
 				m_scrollPosition = GUILayout.BeginScrollView(m_scrollPosition);
 
 				foreach (var asset in m_windowData.AssetDatabase.GetAssets<Material>())
+				{
+					asset.LoadData();
 					asset.DrawView();
+				}
 
 				GUILayout.EndScrollView();
 			}
